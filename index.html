@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>英语阅读助手原型</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">EL</div>
+          <div>
+            <p class="eyebrow">轻书店风原型</p>
+            <h1>英语阅读助手</h1>
+          </div>
+        </div>
+
+        <nav class="nav">
+          <button class="nav-item active" data-view="reader">阅读</button>
+          <button class="nav-item" data-view="vocabulary">生词本</button>
+          <button class="nav-item" data-view="favorites">句子收藏</button>
+        </nav>
+
+        <section class="panel input-panel">
+          <div class="section-header">
+            <p class="eyebrow">输入</p>
+            <h2>开始方式</h2>
+          </div>
+
+          <div class="segmented">
+            <button class="segment active" data-input-mode="screenshot">截屏取词</button>
+            <button class="segment" data-input-mode="paste">粘贴文本</button>
+            <button class="segment" data-input-mode="image">拍照识别</button>
+          </div>
+
+          <div class="input-mode active" data-mode-panel="screenshot">
+            <p class="muted">
+              这是电脑端的主流程。正式版会支持快捷键截屏取词，当前原型先加载一份示例识别结果。
+            </p>
+            <button id="load-sample-btn" class="primary-btn">加载截屏示例</button>
+          </div>
+
+          <div class="input-mode" data-mode-panel="paste">
+            <label class="field-label" for="paste-input">粘贴英文文本</label>
+            <textarea id="paste-input" rows="7" placeholder="把英文段落粘贴到这里..."></textarea>
+            <button id="analyze-paste-btn" class="primary-btn">开始解析</button>
+          </div>
+
+          <div class="input-mode" data-mode-panel="image">
+            <div class="upload-box">
+              <p>拍照识别占位流程</p>
+              <p class="muted">手机端会直接走相机扫描，这里先展示上传入口和示例效果。</p>
+            </div>
+            <button id="load-image-sample-btn" class="secondary-btn">使用拍照示例</button>
+          </div>
+        </section>
+
+        <section class="panel recent-panel">
+          <div class="section-header compact">
+            <p class="eyebrow">最近使用</p>
+            <h2>快速继续</h2>
+          </div>
+          <div id="recent-list" class="recent-list"></div>
+        </section>
+      </aside>
+
+      <main class="main-content">
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">打开即可使用</p>
+            <h2 id="view-title">阅读工作区</h2>
+          </div>
+        </header>
+
+        <section id="reader-view" class="view active">
+          <div class="workspace-grid">
+            <section class="panel reading-panel">
+              <div class="section-header">
+                <p class="eyebrow">阅读区域</p>
+                <h2>点击句子查看解析</h2>
+              </div>
+              <p class="muted intro-copy">
+                点击句子会打开气泡解析卡。点击高亮关键词，会打开单词卡片。
+              </p>
+              <div id="reading-surface" class="reading-surface"></div>
+            </section>
+
+            <section class="panel side-panel">
+              <div class="section-header compact">
+                <p class="eyebrow">当前焦点</p>
+                <h2>即时操作</h2>
+              </div>
+
+              <div id="empty-state" class="empty-state">
+                <p>先选中一句话，这里就会显示按结构拆分的解析内容。</p>
+              </div>
+
+              <div id="sentence-card" class="bubble-card hidden" aria-live="polite"></div>
+              <div id="word-card" class="word-card hidden" aria-live="polite"></div>
+            </section>
+          </div>
+        </section>
+
+        <section id="vocabulary-view" class="view">
+          <div class="panel library-panel">
+            <div class="section-header">
+              <p class="eyebrow">生词本</p>
+              <h2>已保存单词</h2>
+            </div>
+            <div id="vocabulary-list" class="library-list"></div>
+          </div>
+        </section>
+
+        <section id="favorites-view" class="view">
+          <div class="panel library-panel">
+            <div class="section-header">
+              <p class="eyebrow">句子收藏</p>
+              <h2>已收藏句子</h2>
+            </div>
+            <div id="favorites-list" class="library-list"></div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <template id="sentence-template">
+      <button class="sentence-chip"></button>
+    </template>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
